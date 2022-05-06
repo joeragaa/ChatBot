@@ -10,7 +10,7 @@
       <TargetName>Target 1</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060960::V5.06 update 7 (build 960)::.\ARMCC</pCCUsed>
+      <pCCUsed>5060750::V5.06 update 6 (build 750)::ARMCC</pCCUsed>
       <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
@@ -393,9 +393,14 @@
               <FilePath>.\tm4c123gh6pm.h</FilePath>
             </File>
             <File>
-              <FileName>init.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\init.h</FilePath>
+              <FileName>can.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\can.c</FilePath>
+            </File>
+            <File>
+              <FileName>uart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\uart.c</FilePath>
             </File>
             <File>
               <FileName>driverlib.lib</FileName>
@@ -403,34 +408,39 @@
               <FilePath>C:\ti\TivaWare_C_Series-2.2.0.295\driverlib\rvmdk\driverlib.lib</FilePath>
             </File>
             <File>
-              <FileName>VerticalMotor.h</FileName>
+              <FileName>can.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\VerticalMotor.h</FilePath>
+              <FilePath>.\can.h</FilePath>
             </File>
             <File>
-              <FileName>HorizontalMotor.h</FileName>
+              <FileName>init.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\HorizontalMotor.h</FilePath>
+              <FilePath>.\init.h</FilePath>
             </File>
             <File>
-              <FileName>Sorting.h</FileName>
+              <FileName>uart.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\Sorting.h</FilePath>
+              <FilePath>.\uart.h</FilePath>
             </File>
             <File>
-              <FileName>CAN_Connection.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\CAN_Connection.h</FilePath>
+              <FileName>GPIO.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\GPIO.c</FilePath>
             </File>
             <File>
-              <FileName>GPIO_Init.h</FileName>
+              <FileName>GPIO.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\GPIO_Init.h</FilePath>
+              <FilePath>.\GPIO.h</FilePath>
             </File>
             <File>
-              <FileName>ServoMotor.h</FileName>
+              <FileName>cipher.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\cipher.c</FilePath>
+            </File>
+            <File>
+              <FileName>cipher.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\ServoMotor.h</FilePath>
+              <FilePath>.\cipher.h</FilePath>
             </File>
           </Files>
         </Group>

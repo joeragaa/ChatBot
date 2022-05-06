@@ -1,61 +1,36 @@
-#include "GPIO_Init.h"
-#include "Sorting.h"
+/*
+the main body of the program contains the initilizations defined in
+their respective header files and referenced in the init head file.
+the program then enters an infinite loop which designates the idle state.
+if a can interrupt or a uart interrupt triggers, their flags are raised and
+the program enters these functions and the state dependant leds are
+activated accordingly inside the bodies of each function.
+///////////////////////////////////////
+How to use:
+Connect the two tivas with the USB cables and the CAN transceivers.
+Open Putty and connect to the respective COM with baudrate 115200
+press the left switch to start accepting data from the pc to the tiva (data collection state)
+press enter or the right switch to send the data and enter data transmission state state
+///////////////////////////////////////
+Color Legend:
+Blue for idle state
+White for data collection state (PC to Tiva)
+Green for data transmission state (Tiva to Tiva)
+Red for data collection state (Tiva to Tiva)
+Note: the Red and Green lights are not usually visible due to high speed transmission
+but can be viewed if the provided delay period is increased.
+*/
+#include "init.h"
 
-//Main routine
-int main(void) {
-	GPIO_Init();
-	IntMasterEnable();
-	returnToHome();
-	while(1){
-		StoringDecision();
-		}
-}
+int main(void) {	
+	initClock();
+	initGPIO();
+	CAN_Init();
+	uart_init();
+	for(;;){
+		stateChange(BLUE);   
+		UARTRecieve();
+		CAN_recieve();
+	}
 
-//Interrupt service routine
-void VerLimit(void){
-	GPIOIntClear(GPIO_PORTB_BASE, PINS);	
-	GPIOIntDisable(GPIO_PORTB_BASE, PINS);
-	SysCtlDelay(1000000);
-	stopVerStepper();
-	verticalLimit=1;
-	GPIOIntEnable(GPIO_PORTB_BASE, PINS);
-}
-//Interrupt service routine
-void HorLimit(void){
-	GPIOIntClear(GPIO_PORTA_BASE, GPIO_PIN_7);
-	GPIOIntDisable(GPIO_PORTA_BASE, GPIO_PIN_7);
-	SysCtlDelay(1000000);
-	stopHorStepper();
-	horizontalLimit=1;
-	GPIOIntEnable(GPIO_PORTA_BASE, GPIO_PIN_7);
-}
-//Interrupt service routine
-void TopIR(void){
-	GPIOIntClear(GPIO_PORTF_BASE, GPIO_PIN_1);	
-	GPIOIntDisable(GPIO_PORTF_BASE, GPIO_PIN_1);
-	SysCtlDelay(1000000);
-	upperIR=1;
-	GPIOIntEnable(GPIO_PORTF_BASE, GPIO_PIN_1);
-}
-//Interrupt service routine
-void BottomIR(void){
-	GPIOIntClear(GPIO_PORTD_BASE, GPIO_PIN_1);
-	GPIOIntDisable(GPIO_PORTD_BASE, GPIO_PIN_1);
-	SysCtlDelay(1000000);
-	lowerIR=1;
-	GPIOIntEnable(GPIO_PORTD_BASE, GPIO_PIN_1);
-}
-void TallPartDone(void){
-	  uint32_t status=0;
-		status = TimerIntStatus(TIMER5_BASE,true);
-		TimerIntClear(TIMER5_BASE,status);
-		TimerDisable(TIMER5_BASE, TIMER_A);
-		TallDone=1;
-}
-void ShortPartDone(void){
-	  uint32_t status=0;
-		status = TimerIntStatus(TIMER1_BASE,true);
-		TimerIntClear(TIMER1_BASE,status);
-		TimerDisable(TIMER1_BASE, TIMER_A);
-		ShortDone=1;
 }
